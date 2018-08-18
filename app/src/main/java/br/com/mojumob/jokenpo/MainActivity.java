@@ -13,10 +13,17 @@ public class MainActivity extends AppCompatActivity {
     //Atributos
     private ImageView imgPedra, imgPapel, imgTesoura, imgComputador;
     private TextView txtResultado;
+
+    //Constantes
+    //Elementos
     private final String PEDRA = "Pedra";
     private final String PAPEL = "Papel";
     private final String TESOURA = "Tesoura";
 
+    //Resultados
+    private final String EMPATE = "Empate :|";
+    private final String VITORIA = "Você ganhou :)";
+    private final String DERROTA = "Você perdeu :(";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -63,9 +70,27 @@ public class MainActivity extends AppCompatActivity {
 
         if(elementoUsuario == PEDRA){
             if(elementoComputador == PEDRA){
-                txtResultado.setText("Empate");
+                txtResultado.setText(EMPATE);
             }else if(elementoComputador == PAPEL){
-                txtResultado.setText("Você ganhou!");
+                txtResultado.setText(DERROTA);
+            }else{
+                txtResultado.setText(VITORIA);
+            }
+        }else if(elementoUsuario == PAPEL){
+            if(elementoComputador == PEDRA){
+                txtResultado.setText(VITORIA);
+            }else if(elementoComputador == PAPEL){
+                txtResultado.setText(EMPATE);
+            }else{
+                txtResultado.setText(DERROTA);
+            }
+        }else{
+            if(elementoComputador == PEDRA){
+                txtResultado.setText(DERROTA);
+            }else if(elementoComputador == PAPEL){
+                txtResultado.setText(VITORIA);
+            }else{
+                txtResultado.setText(EMPATE);
             }
         }
 
