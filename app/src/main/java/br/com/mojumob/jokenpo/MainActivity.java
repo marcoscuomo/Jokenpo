@@ -5,7 +5,6 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import java.util.Random;
 
@@ -13,7 +12,10 @@ public class MainActivity extends AppCompatActivity {
 
     //Atributos
     private ImageView imgPedra, imgPapel, imgTesoura, imgComputador;
-    private TextView txtResultador;
+    private TextView txtResultado;
+    private final String PEDRA = "Pedra";
+    private final String PAPEL = "Papel";
+    private final String TESOURA = "Tesoura";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,7 +27,7 @@ public class MainActivity extends AppCompatActivity {
         imgPapel      = findViewById(R.id.imgPapel);
         imgTesoura    = findViewById(R.id.imgTesoura);
         imgComputador = findViewById(R.id.imgComputador);
-        txtResultador = findViewById(R.id.txtResultado);
+        txtResultado = findViewById(R.id.txtResultado);
 
 
         //Tratando evento clique nas imagens
@@ -33,19 +35,39 @@ public class MainActivity extends AppCompatActivity {
         imgPedra.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String elementoUsuario = "pedra";
-                jogar(elementoUsuario);
+                jogar(PEDRA);
+            }
+        });
+
+        //Papel
+        imgPapel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                jogar(PAPEL);
+            }
+        });
+
+        //Tesoura
+        imgTesoura.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                jogar(TESOURA);
             }
         });
     }
 
-    private void jogar(String elementoUsuario) {
+    private void jogar(String elemento) {
 
         String elementoComputador = escolhaComputador();
+        String elementoUsuario = elemento;
 
-
-        Toast.makeText(this, elementoComputador, Toast.LENGTH_SHORT).show();
-
+        if(elementoUsuario == PEDRA){
+            if(elementoComputador == PEDRA){
+                txtResultado.setText("Empate");
+            }else if(elementoComputador == PAPEL){
+                txtResultado.setText("Você ganhou!");
+            }
+        }
 
     }
 
@@ -57,18 +79,20 @@ public class MainActivity extends AppCompatActivity {
          * 2 - Tesoura
          * */
 
-        Random gerador = new Random();
-        int valorComputador = gerador.nextInt(2);
-        String elementoComputador = "";
+        int valorComputador = new Random().nextInt(3);
+        String elementoComputador;
         if(valorComputador == 0){
-            elementoComputador = "Pedra";
+            elementoComputador = PEDRA;
+            imgComputador.setImageResource(R.drawable.pedra_jogador);
         }else if(valorComputador == 1){
-            elementoComputador = "Papel";
+            elementoComputador = PAPEL;
+            imgComputador.setImageResource(R.drawable.papel_jogador);
         }else{
-            elementoComputador = "Tesoura";
+            elementoComputador = TESOURA;
+            imgComputador.setImageResource(R.drawable.tesoura_jogador);
         }
 
-        return escolhaComputador();
+        return elementoComputador;
 
     }
 }
