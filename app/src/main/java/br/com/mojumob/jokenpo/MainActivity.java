@@ -5,7 +5,6 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
-
 import java.util.Random;
 
 public class MainActivity extends AppCompatActivity {
@@ -28,13 +27,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-        //Inicializações
-        imgPedra      = findViewById(R.id.imgPedra);
-        imgPapel      = findViewById(R.id.imgPapel);
-        imgTesoura    = findViewById(R.id.imgTesoura);
-        imgComputador = findViewById(R.id.imgComputador);
-        txtResultado = findViewById(R.id.txtResultado);
+        inicializaComponentes();
 
 
         //Tratando evento clique nas imagens
@@ -61,6 +54,15 @@ public class MainActivity extends AppCompatActivity {
                 jogar(TESOURA);
             }
         });
+    }
+
+    private void inicializaComponentes() {
+        //Inicializações
+        imgPedra      = findViewById(R.id.imgPedra);
+        imgPapel      = findViewById(R.id.imgPapel);
+        imgTesoura    = findViewById(R.id.imgTesoura);
+        imgComputador = findViewById(R.id.imgComputador);
+        txtResultado = findViewById(R.id.txtResultado);
     }
 
     private void jogar(String elemento) {
